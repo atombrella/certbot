@@ -310,6 +310,15 @@ def prepare_and_parse_args(plugins, args, detect_defaults=False):
         "security", "--rsa-key-size", type=int, metavar="N",
         default=flag_default("rsa_key_size"), help=config_help("rsa_key_size"))
     helpful.add(
+        ["testing", "certonly", "renew", "run"], "--key-type", dest="key_type",
+        default=flag_default("key_type"),
+        help="The type of private key, "
+             "either 'ecdsa' or 'rsa(default)'")
+    helpful.add(
+        ["testing", "certonly", "renew", "run"], "--elliptic-ccurve", dest="elliptic_curve",
+        default=flag_default("elliptic_curve"),
+        help="The SECG name of the EC curve (prime256v1, ... etc.)")
+    helpful.add(
         "security", "--must-staple", action="store_true",
         dest="must_staple", default=flag_default("must_staple"),
         help=config_help("must_staple"))
