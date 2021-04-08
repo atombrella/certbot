@@ -33,7 +33,8 @@ More details about these changes can be found on our GitHub repo.
 
 ### Fixed
 
-*
+* Revoking a certificate based on an ECDSA key can now be done with `--cert-key`.
+  See [GH #8569](https://github.com/certbot/certbot/issues/8569).
 
 More details about these changes can be found on our GitHub repo.
 
@@ -788,7 +789,7 @@ More details about these changes can be found on our GitHub repo.
 
 ### Changed
 
-* Certbot and its acme module now depend on Ejosepy>=1.1.0 to avoid printing the
+* Certbot and its acme module now depend on josepy>=1.1.0 to avoid printing the
   warnings described at https://github.com/certbot/josepy/issues/13.
 * Apache plugin now respects CERTBOT_DOCS environment variable when adding
   command line defaults.

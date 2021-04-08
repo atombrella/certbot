@@ -405,6 +405,10 @@ class RevokeTest(test_util.TempDirTestCase):
         self._call()
         self.assertIs(mock_delete.called, False)
 
+    def test_revoke_ecdsa_key(self):
+        pass
+
+
 class DeleteIfAppropriateTest(test_util.ConfigTestCase):
     """Tests for certbot._internal.main._delete_if_appropriate """
 
