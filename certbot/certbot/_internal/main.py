@@ -1092,8 +1092,6 @@ def revoke(config, unused_plugins: plugins_disco.PluginsRegistry) -> Optional[st
     """
     # For user-agent construction
     config.installer = config.authenticator = None
-    print("revoking certificates")
-    logging.warning("revoking certificates")
 
     if config.cert_path is None and config.certname:
         # When revoking via --cert-name, take the cert path and server from renewalparams
