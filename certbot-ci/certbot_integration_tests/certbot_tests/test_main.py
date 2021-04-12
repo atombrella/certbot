@@ -630,7 +630,7 @@ def test_revoke_ecdsa_cert_key(context):
         '-d', cert,
     ])
     key = join(context.config_dir, "live", cert, 'privkey.pem')
-    assert_elliptic_key(key, 'secp256r1')
+    assert_elliptic_key(key, SECP256R1)
     context.certbot([
         'revoke', cert, '--cert-key', key,
     ])
