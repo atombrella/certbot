@@ -14,6 +14,7 @@ from cryptography.hazmat.primitives.asymmetric.ec import SECP521R1
 from cryptography.x509 import NameOID
 import pytest
 
+from certbot.interfaces import RenewableCert
 from certbot_integration_tests.certbot_tests import context as certbot_context
 from certbot_integration_tests.certbot_tests.assertions import assert_cert_count_for_lineage
 from certbot_integration_tests.certbot_tests.assertions import assert_elliptic_key
@@ -623,19 +624,22 @@ def test_revoke_and_unregister(context):
 
 def test_revoke_ecdsa_cert_key(context):
     """Test revoking a certificate """
-    cert = context.get_domain('curve')
+    cert: str = context.get_domain('curve')
     context.certbot([
         'certonly',
         '--key-type', 'ecdsa', '--elliptic-curve', 'secp256r1',
         '-d', cert,
     ])
     key = join(context.config_dir, "live", cert, 'privkey.pem')
+    cert_path = join(context.config_dir, "live", cert, 'cert.pem')
     assert_elliptic_key(key, SECP256R1)
     context.certbot([
-        'revoke', cert, '--cert-key', key,
+        'revoke', '--cert-path', cert_path, '--key-path', key,
+        '--no-delete-after-revoke',
     ])
     time.sleep(5)
     output = context.certbot(['certificates'])
+    print("here's some output", output)
 
     assert output.count('REVOKED') == 1, 'Expected {0} to be REVOKED'.format(cert)
 
