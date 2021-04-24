@@ -636,9 +636,7 @@ def test_revoke_ecdsa_cert_key(context):
         'revoke', '--cert-path', cert_path, '--key-path', key,
         '--no-delete-after-revoke',
     ])
-    time.sleep(5)
     output = context.certbot(['certificates'])
-    print("here's some output", output)
 
     assert output.count('REVOKED') == 1, 'Expected {0} to be REVOKED'.format(cert)
 
