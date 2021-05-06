@@ -405,7 +405,6 @@ class RevokeTest(test_util.TempDirTestCase):
         self._call()
         self.assertIs(mock_delete.called, False)
 
-
 class DeleteIfAppropriateTest(test_util.ConfigTestCase):
     """Tests for certbot._internal.main._delete_if_appropriate """
 
