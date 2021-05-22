@@ -970,12 +970,15 @@ class ClientNetwork:
     :param source_address: Optional source address to bind to when making requests.
     :type source_address: str or tuple(str, int)
     """
-    def __init__(self, key, account=None, alg=jose.RS256, verify_ssl=True,
-                 user_agent='acme-python', timeout=DEFAULT_NETWORK_TIMEOUT,
+    def __init__(self, key: jose.JWK, account=None,
+                 alg: jose.JWASignature = jose.RS256, verify_ssl=True,
+                 user_agent: str = 'acme-python', timeout=DEFAULT_NETWORK_TIMEOUT,
                  source_address=None):
         self.key = key
         self.account = account
-        self.alg = alg
+        # ACME: RS256 for RSA keys, ES256 for Elliptic Curve keys (also OKP)
+        alg_types: Dict[str, jose.JWASignature] = {'EC': jose.ES256, 'RSA': jose.RS256}
+        self.alg = alg_types.get(self.key.typ)
         self.verify_ssl = verify_ssl
         self._nonces: Set[Text] = set()
         self.user_agent = user_agent
@@ -1012,9 +1015,8 @@ class ClientNetwork:
             obj.le_acme_version = acme_version
         jobj = obj.json_dumps(indent=2).encode() if obj else b''
         logger.debug('JWS payload:\n%s', jobj)
-        alg = {'RSA': jose.RS256, 'EC': jose.ES256}.get(self.key.typ)
         kwargs = {
-            "alg": alg,
+            "alg": self.alg,
             "nonce": nonce
         }
         if acme_version == 2:
