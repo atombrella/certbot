@@ -3,111 +3,111 @@ updates:
   - package-ecosystem: 'pip'
     directory: '/acme/'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'
 
   - package-ecosystem: 'pip'
     directory: '/certbot/'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-cloudflare/'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'
 
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-cloudxns'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-digitalocean'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-dnsimple'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-dnsmadeeasy'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-gehirn'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-google'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-linode'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-luadns'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-nsone'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-ovh'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-rfc2136'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-route53'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
   
   - package-ecosystem: 'pip'
     directory: '/certbot-dns-sakuracloud'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
     labels:
       - 'dependencies'  
