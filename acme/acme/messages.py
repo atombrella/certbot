@@ -449,6 +449,23 @@ class NewRegistration(ResourceMixin, Registration):
     resource: str = fields.resource(resource_type)
 
 
+@Directory.register
+class KeyChange(ResourceMixin):
+    """
+    RFC 8555, section 7.3.5. The account key can be changed
+    by submitting both the old and the newly generated account
+    key.
+
+    :ivar: account
+    :ivar: newKey
+    :ivar: oldKey
+    """
+    resource_type: str = "key-change"
+    account: str = jose.field('account', omitempty=False)
+    newKey: jose.JWK = jose.field('newKey', omitempty=False, decoder=jose.JWK.from_json)
+    oldKey: jose.JWK = jose.field('oldKey', omitempty=False, decoder=jose.JWK.from_json)
+
+
 class UpdateRegistration(ResourceMixin, Registration):
     """Update registration."""
     resource_type = 'reg'

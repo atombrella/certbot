@@ -671,6 +671,31 @@ class ClientV2(ClientBase):
         new_regr = self._get_v2_account(regr)
         return super().update_registration(new_regr, update)
 
+    def update_account_key(self,
+                           regr: messages.RegistrationResource,
+                           response: requests.Response, uri: Optional[str] = None
+                           ) -> messages.KeyChange:
+        """
+        Updates the account key for the
+
+        :param messages.RegistrationResource regr:
+
+        :returns: The updated key of the account.
+        :rtype: `.KeyChange`
+        """
+        # generate the key, and then post it
+        self.net.account = None
+
+        response = self._post(
+            self.directory['keyChange'],
+            regr.body.key,
+        )
+        resp = self._post(uri, response)
+        keyChange = messages.KeyChange(
+            oldKey=regr.keys()
+        )
+        return keyChange
+
     def _get_v2_account(self, regr: messages.RegistrationResource) -> messages.RegistrationResource:
         self.net.account = None
         only_existing_reg = regr.body.update(only_return_existing=True)

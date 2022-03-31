@@ -3,7 +3,6 @@
 import copy
 import datetime
 import http.client as http_client
-import ipaddress
 import json
 import unittest
 from typing import Dict
@@ -27,6 +26,7 @@ CSR_SAN_PEM = test_util.load_vector('csr-san.pem')
 CSR_MIXED_PEM = test_util.load_vector('csr-mixed.pem')
 KEY = jose.JWKRSA.load(test_util.load_vector('rsa512_key.pem'))
 KEY2 = jose.JWKRSA.load(test_util.load_vector('rsa256_key.pem'))
+SECP256R1_KEY = jose.JWKEC.load(test_util.load_vector('ec_secp256r1.pem'))
 
 DIRECTORY_V1 = messages.Directory({
     messages.NewRegistration:
@@ -44,6 +44,7 @@ DIRECTORY_V2 = messages.Directory({
     'newNonce': 'https://www.letsencrypt-demo.org/acme/new-nonce',
     'newOrder': 'https://www.letsencrypt-demo.org/acme/new-order',
     'revokeCert': 'https://www.letsencrypt-demo.org/acme/revoke-cert',
+    'keyChange': 'https://www.letsencrypt-demo.org/acme/key-change',
 })
 
 
@@ -251,7 +252,7 @@ class BackwardsCompatibleClientV2Test(ClientTestBase):
 
         mock_client().request_issuance.return_value = self.certr
 
-        deadline = deadline = datetime.datetime.now() - datetime.timedelta(seconds=60)
+        deadline = datetime.datetime.now() - datetime.timedelta(seconds=60)
         client = self._init()
         self.assertRaises(errors.TimeoutError, client.finalize_order,
             self.orderr, deadline)
@@ -885,6 +886,12 @@ class ClientV2Test(ClientTestBase):
 
         self.response.json.return_value = self.regr.body.update(
             contact=()).to_json()
+
+    def test_key_change(self):
+        # with mock.patch('acme.client.ClientV2') as mock_client:
+        self.client.directory = messages.Directory({
+            'meta': messages.Directory.Meta(external_account_required=False)
+        })
 
     def test_external_account_required_true(self):
         self.client.directory = messages.Directory({
