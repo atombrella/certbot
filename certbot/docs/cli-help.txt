@@ -1,4 +1,4 @@
-usage: 
+usage:
   certbot [SUBCOMMAND] [options] [-d DOMAIN] [-d DOMAIN] ...
 
 Certbot can obtain and install HTTPS/TLS/SSL certificates.  By default,
@@ -389,6 +389,10 @@ register:
 
 update_account:
   Options for account modification
+
+  --key-type ecdsa      Will update the account to one based on an ``secp256r1`` elliptic
+                        curve private key. It'll reduce bandwidth on backend servers
+                        supporting the requests.
 
 unregister:
   Options for account deactivation.

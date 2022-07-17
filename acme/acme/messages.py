@@ -245,7 +245,7 @@ class Directory(jose.JSONDeSerializable):
                 yield name[1:] if name == '_terms_of_service' else name
 
         def _internal_name(self, name: str) -> str:
-            return '_' + name if name == 'terms_of_service' else name
+            return f'_{name}' if name == 'terms_of_service' else name
 
     @classmethod
     def _canon_key(cls, key: Union[str, HasResourceType, Type[HasResourceType]]) -> str:
@@ -462,8 +462,8 @@ class KeyChange(ResourceMixin):
     """
     resource_type: str = "key-change"
     account: str = jose.field('account', omitempty=False)
-    newKey: jose.JWK = jose.field('newKey', omitempty=False, decoder=jose.JWK.from_json)
-    oldKey: jose.JWK = jose.field('oldKey', omitempty=False, decoder=jose.JWK.from_json)
+    newKey: jose.JWK = jose.field('newKey', omitempty=False, default=None)
+    oldKey: jose.JWK = jose.field('oldKey', omitempty=False, default=None)
 
 
 class UpdateRegistration(ResourceMixin, Registration):

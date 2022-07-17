@@ -205,6 +205,8 @@ def register(config: configuration.NamespaceConfig, account_storage: AccountStor
         config.email = None
 
     # Each new registration shall use a fresh new key
+    # the work to support
+
     rsa_key = generate_private_key(
             public_exponent=65537,
             key_size=config.rsa_key_size,
@@ -275,10 +277,6 @@ def perform_registration(acme: acme_client.ClientV2, config: configuration.Names
             config.email = display_ops.get_email(invalid=True)
             return perform_registration(acme, config, tos_cb)
         raise
-
-
-def updateAccountKey():
-    pass
 
 
 class Client:

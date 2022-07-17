@@ -153,8 +153,8 @@ class TLSALPN01Server(TLSServer, ACMEServerMixin):
                  certs: List[Tuple[crypto.PKey, crypto.X509]],
                  challenge_certs: Mapping[str, Tuple[crypto.PKey, crypto.X509]],
                  ipv6: bool = False) -> None:
-        TLSServer.__init__(
-            self, server_address, _BaseRequestHandlerWithLogging, certs=certs,
+        super().__init__(
+            server_address, _BaseRequestHandlerWithLogging, certs=certs,
             ipv6=ipv6)
         self.challenge_certs = challenge_certs
 
@@ -251,7 +251,7 @@ class HTTP01RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def handle(self) -> None:
         """Handle request."""
         self.log_message("Incoming request")
-        BaseHTTPServer.BaseHTTPRequestHandler.handle(self)
+        self.handle()
 
     def do_GET(self) -> None:  # pylint: disable=invalid-name,missing-function-docstring
         if self.path == "/":
@@ -315,4 +315,4 @@ class _BaseRequestHandlerWithLogging(socketserver.BaseRequestHandler):
     def handle(self) -> None:
         """Handle request."""
         self.log_message("Incoming request")
-        socketserver.BaseRequestHandler.handle(self)
+        self.handle()

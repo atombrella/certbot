@@ -6,7 +6,8 @@ Certbot adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-*
+* Support for updating the account to a `secp256r1` based EC key. This reduces
+  bandwidth on the backend servers issuing new certificates etc. Please see
 
 ### Changed
 

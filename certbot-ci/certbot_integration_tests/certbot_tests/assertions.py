@@ -1,8 +1,10 @@
 """This module contains advanced assertions for the certbot integration tests."""
 import io
+import json
 import os
 from typing import Type
 
+import josepy
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateKey, EllipticCurve
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
@@ -34,6 +36,21 @@ def assert_elliptic_key(key: str, curve: Type[EllipticCurve]) -> None:
 
     assert isinstance(key, EllipticCurvePrivateKey)
     assert isinstance(key.curve, curve)
+
+
+def assert_jwk_type(file: str, key_type: Type[josepy.JWK]) -> None:
+    """
+    Assert that the given file is world-readable, but not world-writable or world-executable.
+    :param str file: path of the file to check
+    :param key_type: The JWK type for the instance check of the JSON file.
+    """
+
+    with open(file, "r") as fp:
+        jobj = json.loads(fp.read())
+
+    jwk = josepy.JWK.from_json(jobj=jobj)
+
+    assert isinstance(jwk, key_type)
 
 
 def assert_rsa_key(key: str) -> None:

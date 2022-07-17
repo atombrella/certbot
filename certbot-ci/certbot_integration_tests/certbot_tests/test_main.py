@@ -10,6 +10,7 @@ from typing import Iterable
 from typing import Generator
 from typing import Type
 
+import josepy
 from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurve
 from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1
 from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1
@@ -582,6 +583,17 @@ def test_ocsp_must_staple(context: IntegrationTestsContext) -> None:
     certificate = misc.read_certificate(join(context.config_dir,
                                              'live/{0}/cert.pem').format(certname))
     assert 'status_request' in certificate or '1.3.6.1.5.5.7.1.24' in certificate
+
+
+def test_change_registration_key(context: IntegrationTestsContext) -> None:
+    """Test various scenarios that revokes a certificate."""
+    context.certbot(['register', '--email', 'ex1@domain.org,ex2@domain.org'])
+
+    # might just also be ecdsa-account-key
+    context.certbot(['update_account', '--key-type', 'ecdsa'])
+
+    key = misc.get_account_key_path(context)
+    assert_elliptic_key(key, josepy.ES256)
 
 
 def test_revoke_simple(context: IntegrationTestsContext) -> None:

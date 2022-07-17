@@ -683,13 +683,14 @@ class ClientV2(ClientBase):
         :returns: The updated key of the account.
         :rtype: `.KeyChange`
         """
-        # generate the key, and then post it
         self.net.account = regr.new_authzr_uri
 
         response = self._post(
             self.directory['keyChange'],
-            regr.body.key,
+            self.net.account,
+            self.net.key,
         )
+        # we need to make a call to
         keyChange = messages.KeyChange(
             oldKey=regr.keys()
         )
