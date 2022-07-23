@@ -690,7 +690,8 @@ class ClientV2(ClientBase):
             self.net.account,
             self.net.key,
         )
-        # we need to make a call to
+        # we need to make a call to generate a new key, and
+        # I don't really know how to do this
         keyChange = messages.KeyChange(
             oldKey=regr.keys()
         )
