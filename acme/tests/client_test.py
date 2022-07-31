@@ -887,11 +887,16 @@ class ClientV2Test(ClientTestBase):
         self.response.json.return_value = self.regr.body.update(
             contact=()).to_json()
 
+    # todo finish this test
     def test_key_change(self):
-        # with mock.patch('acme.client.ClientV2') as mock_client:
-        self.client.directory = messages.Directory({
-            'meta': messages.Directory.Meta(external_account_required=False)
-        })
+        # register
+        # change the key
+        #
+
+        with mock.patch('acme.client.ClientV2') as mock_client:
+            self.client.directory = messages.Directory({
+                'meta': messages.Directory.Meta(external_account_required=False)
+            })
 
     def test_external_account_required_true(self):
         self.client.directory = messages.Directory({
