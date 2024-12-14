@@ -208,14 +208,14 @@ class ChooseNamesTest(unittest.TestCase):
     def test_sort_names_trivial(self):
         from certbot.display.ops import _sort_names
 
-        #sort an empty list
+        # sort an empty list
         assert _sort_names([]) == []
 
-        #sort simple domains
+        # sort simple domains
         some_domains = ["ex.com", "zx.com", "ax.com"]
         assert _sort_names(some_domains) == ["ax.com", "ex.com", "zx.com"]
 
-        #Sort subdomains of a single domain
+        # Sort subdomains of a single domain
         domain = ".ex.com"
         unsorted_short = ["e", "a", "z", "y"]
         unsorted_long = [us + domain for us in unsorted_short]
@@ -302,7 +302,7 @@ class ChooseNamesTest(unittest.TestCase):
         with mock.patch(
                 "certbot.display.ops.internal_display_util.separate_list_input"
         ) as mock_sli:
-            unicode_error = UnicodeEncodeError('mock', u'', 0, 1, 'mock')
+            unicode_error = UnicodeEncodeError('mock', '', 0, 1, 'mock')
             mock_sli.side_effect = unicode_error
             assert _choose_names_manually() == []
         # Valid domains
@@ -311,9 +311,9 @@ class ChooseNamesTest(unittest.TestCase):
                                            "under_score.example.com,"
                                            "justtld,"
                                            "valid.example.com"))
-        assert _choose_names_manually() == \
-                         ["example.com", "under_score.example.com",
-                          "justtld", "valid.example.com"]
+        assert _choose_names_manually() == [
+            "example.com", "under_score.example.com", "justtld", "valid.example.com",
+        ]
 
     @test_util.patch_display_util()
     def test_choose_manually_retry(self, mock_util):

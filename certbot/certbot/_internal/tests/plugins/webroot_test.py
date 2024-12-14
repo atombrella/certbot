@@ -1,7 +1,5 @@
 """Tests for certbot._internal.plugins.webroot."""
 
-from __future__ import print_function
-
 import argparse
 import errno
 import json

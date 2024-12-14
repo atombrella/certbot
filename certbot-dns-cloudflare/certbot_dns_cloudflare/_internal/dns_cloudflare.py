@@ -82,9 +82,9 @@ class Authenticator(dns_common.DNSAuthenticator):
         if not self.credentials:  # pragma: no cover
             raise errors.Error("Plugin has not been prepared.")
         if self.credentials.conf('api-token'):
-            return _CloudflareClient(api_token = self.credentials.conf('api-token'))
-        return _CloudflareClient(email = self.credentials.conf('email'),
-                                 api_key = self.credentials.conf('api-key'))
+            return _CloudflareClient(api_token=self.credentials.conf('api-token'))
+        return _CloudflareClient(email=self.credentials.conf('email'),
+                                 api_key=self.credentials.conf('api-key'))
 
 
 class _CloudflareClient:

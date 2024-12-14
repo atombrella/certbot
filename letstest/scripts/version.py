@@ -4,8 +4,6 @@
 Provides a simple utility for determining the Certbot version number
 
 """
-from __future__ import print_function
-
 from os.path import abspath
 from os.path import dirname
 from os.path import join

@@ -1,14 +1,12 @@
 """Tests for acme.util."""
 import sys
-import unittest
 
 import pytest
 
 
 def test_it():
     from acme.util import map_keys
-    assert {'a': 'b', 'c': 'd'} == \
-                     map_keys({'a': 'b', 'c': 'd'}, lambda key: key)
+    assert {'a': 'b', 'c': 'd'} == map_keys({'a': 'b', 'c': 'd'}, lambda key: key)
     assert {2: 2, 4: 4} == map_keys({1: 2, 3: 4}, lambda x: x + 1)
 
 
