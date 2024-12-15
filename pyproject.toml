@@ -24,10 +24,8 @@ select = [
     "W",
     # pyupgrade
     # "UP",
-    # Bugbear
-    "B",
     # Tidy Imports
-    "T",
+    "TID",
 ]
 line-length = 119
 exclude = ["tools", "letstest", "linter_plugin.py", "certbot/docs/conf.py"]

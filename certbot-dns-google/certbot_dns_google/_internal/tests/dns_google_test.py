@@ -22,6 +22,7 @@ API_ERROR = Error()
 PROJECT_ID = "test-test-1"
 SCOPES = ['https://www.googleapis.com/auth/ndev.clouddns.readwrite']
 
+
 class AuthenticatorTest(test_util.TempDirTestCase, dns_test_common.BaseAuthenticatorTest):
 
     def setUp(self):
@@ -62,7 +63,9 @@ class AuthenticatorTest(test_util.TempDirTestCase, dns_test_common.BaseAuthentic
 
     @test_util.patch_display_util()
     def test_without_auth(self, unused_mock_get_utility):
-        self.auth._get_google_client = mock.MagicMock(side_effect=googleauth_exceptions.DefaultCredentialsError)
+        self.auth._get_google_client = mock.MagicMock(
+            side_effect=googleauth_exceptions.DefaultCredentialsError
+        )
         self.config.google_credentials = None
         with pytest.raises(PluginError):
             self.auth.perform([self.achall])
@@ -153,7 +156,8 @@ class GoogleClientTest(unittest.TestCase):
 
     @mock.patch('google.auth.load_credentials_from_file')
     def test_client_bad_credentials_file(self, credential_mock):
-        credential_mock.side_effect = googleauth_exceptions.DefaultCredentialsError('Some exception buried in google.auth')
+        credential_mock.side_effect = googleauth_exceptions.DefaultCredentialsError(
+            'Some exception buried in google.auth')
         with pytest.raises(errors.PluginError) as exc_info:
             self._setUp_client_with_mock([])
         assert str(exc_info.value) == \
@@ -184,7 +188,13 @@ class GoogleClientTest(unittest.TestCase):
     def test_add_txt_record(self, credential_mock):
         credential_mock.return_value = (mock.MagicMock(), PROJECT_ID)
 
-        client, changes = self._setUp_client_with_mock([{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
+        client, changes = self._setUp_client_with_mock([
+            {'managedZones': [
+                {
+                    'id': self.zone,
+                    'visibility': self.visibility}]
+            }
+        ])
         credential_mock.assert_called_once_with('/not/a/real/path.json', scopes=SCOPES)
 
         client.add_txt_record(DOMAIN, self.record_name, self.record_content, self.record_ttl)
@@ -212,7 +222,9 @@ class GoogleClientTest(unittest.TestCase):
     def test_add_txt_record_and_poll(self, credential_mock):
         credential_mock.return_value = (mock.MagicMock(), PROJECT_ID)
 
-        client, changes = self._setUp_client_with_mock([{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
+        client, changes = self._setUp_client_with_mock([{
+            'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}]
+        )
         changes.create.return_value.execute.return_value = {'status': 'pending', 'id': self.change}
         changes.get.return_value.execute.return_value = {'status': 'done'}
 
@@ -254,7 +266,7 @@ class GoogleClientTest(unittest.TestCase):
 
         client, changes = self._setUp_client_with_mock(
             [{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
-        # pylint: disable=line-too-long
+        # noqa: E501
         mock_get_rrs = "certbot_dns_google._internal.dns_google._GoogleClient.get_existing_txt_rrset"
         with mock.patch(mock_get_rrs) as mock_rrs:
             mock_rrs.return_value = {"rrdatas": ["sample-txt-contents"], "ttl": self.record_ttl}
@@ -272,7 +284,7 @@ class GoogleClientTest(unittest.TestCase):
 
         client, changes = self._setUp_client_with_mock(
             [{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
-        # pylint: disable=line-too-long
+        # noqa: E501
         mock_get_rrs = "certbot_dns_google._internal.dns_google._GoogleClient.get_existing_txt_rrset"
         with mock.patch(mock_get_rrs) as mock_rrs:
             custom_ttl = 300
@@ -337,7 +349,7 @@ class GoogleClientTest(unittest.TestCase):
         credential_mock.return_value = (mock.MagicMock(), PROJECT_ID)
 
         client, changes = self._setUp_client_with_mock([{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
-        # pylint: disable=line-too-long
+        # noqa: E501
         mock_get_rrs = "certbot_dns_google._internal.dns_google._GoogleClient.get_existing_txt_rrset"
         with mock.patch(mock_get_rrs) as mock_rrs:
             mock_rrs.return_value = {"rrdatas": ["\"sample-txt-contents\"",
@@ -378,7 +390,7 @@ class GoogleClientTest(unittest.TestCase):
         credential_mock.return_value = (mock.MagicMock(), PROJECT_ID)
 
         client, changes = self._setUp_client_with_mock([{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}])
-        # pylint: disable=line-too-long
+        # noqa: E501
         mock_get_rrs = "certbot_dns_google._internal.dns_google._GoogleClient.get_existing_txt_rrset"
         with mock.patch(mock_get_rrs) as mock_rrs:
             mock_rrs.return_value = {"rrdatas": ["\"example-txt-contents\""], "ttl": self.record_ttl}
@@ -480,6 +492,7 @@ class GoogleClientTest(unittest.TestCase):
             [{'managedZones': [{'id': self.zone, 'visibility': self.visibility}]}], API_ERROR)
         rrset = client.get_existing_txt_rrset(self.zone, "_acme-challenge.example.org")
         assert not rrset
+
 
 if __name__ == "__main__":
     sys.exit(pytest.main(sys.argv[1:] + [__file__]))  # pragma: no cover

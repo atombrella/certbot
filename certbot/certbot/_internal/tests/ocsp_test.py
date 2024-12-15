@@ -351,11 +351,11 @@ def _construct_mock_ocsp_response(certificate_status, response_status):
     )
 
 
-# pylint: disable=line-too-long
+# noqa: E501
 openssl_confused = ("", """
 /etc/letsencrypt/live/example.org/cert.pem: good
-	This Update: Dec 17 00:00:00 2016 GMT
-	Next Update: Dec 24 00:00:00 2016 GMT
+        This Update: Dec 17 00:00:00 2016 GMT
+        Next Update: Dec 24 00:00:00 2016 GMT
 """,
 """
 Response Verify Failure
@@ -364,23 +364,23 @@ Response Verify Failure
 
 openssl_happy = ("blah.pem", """
 blah.pem: good
-	This Update: Dec 20 18:00:00 2016 GMT
-	Next Update: Dec 27 18:00:00 2016 GMT
+    This Update: Dec 20 18:00:00 2016 GMT
+    Next Update: Dec 27 18:00:00 2016 GMT
 """,
 "Response verify OK")
 
 openssl_revoked = ("blah.pem", """
 blah.pem: revoked
-	This Update: Dec 20 01:00:00 2016 GMT
-	Next Update: Dec 27 01:00:00 2016 GMT
-	Revocation Time: Dec 20 01:46:34 2016 GMT
+    This Update: Dec 20 01:00:00 2016 GMT
+    Next Update: Dec 27 01:00:00 2016 GMT
+    Revocation Time: Dec 20 01:46:34 2016 GMT
 """,
 """Response verify OK""")
 
 openssl_unknown = ("blah.pem", """
 blah.pem: unknown
-	This Update: Dec 20 18:00:00 2016 GMT
-	Next Update: Dec 27 18:00:00 2016 GMT
+        This Update: Dec 20 18:00:00 2016 GMT
+        Next Update: Dec 27 18:00:00 2016 GMT
 """,
 "Response verify OK")
 
@@ -390,8 +390,8 @@ openssl_expired_ocsp = ("blah.pem", """
 blah.pem: WARNING: Status times invalid.
 140659132298912:error:2707307D:OCSP routines:OCSP_check_validity:status expired:ocsp_cl.c:372:
 good
-	This Update: Apr  6 00:00:00 2016 GMT
-	Next Update: Apr 13 00:00:00 2016 GMT
+        This Update: Apr  6 00:00:00 2016 GMT
+        Next Update: Apr 13 00:00:00 2016 GMT
 """,
 """Response verify OK""")
 
@@ -399,8 +399,8 @@ openssl_expired_ocsp_revoked = ("blah.pem", """
 blah.pem: WARNING: Status times invalid.
 140659132298912:error:2707307D:OCSP routines:OCSP_check_validity:status expired:ocsp_cl.c:372:
 revoked
-	This Update: Apr  6 00:00:00 2016 GMT
-	Next Update: Apr 13 00:00:00 2016 GMT
+        This Update: Apr  6 00:00:00 2016 GMT
+        Next Update: Apr 13 00:00:00 2016 GMT
 """,
 """Response verify OK""")
 

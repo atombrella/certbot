@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 INSTRUCTIONS = (
     "To use certbot-dns-route53, configure credentials as described at "
-    "https://boto3.readthedocs.io/en/latest/guide/configuration.html#best-practices-for-configuring-credentials "  # pylint: disable=line-too-long
+    "https://boto3.readthedocs.io/en/latest/guide/configuration.html#best-practices-for-configuring-credentials "  # noqa: E501
     "and add the necessary permissions for Route53 access.")
 
 

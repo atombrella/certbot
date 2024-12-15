@@ -185,7 +185,7 @@ class TLSALPN01Server(TLSServer, ACMEServerMixin):
             return self.ACME_TLS_1_PROTOCOL
         logger.debug("Cannot agree on ALPN proto. Got: %s", str(alpn_protos))
         # Explicitly close the connection now, by returning an empty string.
-        # See https://www.pyopenssl.org/en/stable/api/ssl.html#OpenSSL.SSL.Context.set_alpn_select_callback  # pylint: disable=line-too-long
+        # See https://www.pyopenssl.org/en/stable/api/ssl.html#OpenSSL.SSL.Context.set_alpn_select_callback  # noqa: E501
         return b""
 
 
