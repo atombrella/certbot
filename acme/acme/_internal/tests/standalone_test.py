@@ -21,7 +21,6 @@ from acme._internal.tests import test_util
 class TLSServerTest(unittest.TestCase):
     """Tests for acme.standalone.TLSServer."""
 
-
     def test_bind(self):  # pylint: disable=no-self-use
         from acme.standalone import TLSServer
         server = TLSServer(
@@ -103,7 +102,7 @@ class HTTP01ServerTest(unittest.TestCase):
                 is_hung = server_thread.is_alive()
                 try:
                     client.shutdown(socket.SHUT_RDWR)
-                except: # pragma: no cover, pylint: disable=bare-except
+                except:  # pragma: no cover, noqa: E722
                     # may raise error because socket could already be closed
                     pass
 
@@ -183,7 +182,7 @@ class BaseDualNetworkedServersTest(unittest.TestCase):
                 try:
                     self.server_bind()
                     self.server_activate()
-                except:
+                except:  # noqa: E722
                     self.server_close()
                     raise
 

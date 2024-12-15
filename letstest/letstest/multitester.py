@@ -285,7 +285,7 @@ def create_client_instance(ec2_client, target, security_group_id, subnet_id, sel
     else:
         # 32 bit systems
         machine_type = 'c1.medium'
-    name = 'le-%s'%target['name']
+    name = 'le-%s' % target['name']
     try:
         instance = make_instance(ec2_client, name, target['ami'], KEYNAME,
                                  machine_type=machine_type, security_group_id=security_group_id,
@@ -322,7 +322,7 @@ def test_client_process(fab_config, inqueue, outqueue, log_dir):
                 install_and_launch_certbot(cxn, instance, target, log_dir)
                 outqueue.put((ii, target, Status.PASS))
                 print("%s - %s SUCCESS"%(target['ami'], target['name']))
-            except:
+            except:  # noqa: E722
                 outqueue.put((ii, target, Status.FAIL))
                 print("%s - %s FAIL"%(target['ami'], target['name']))
                 traceback.print_exc(file=sys.stdout)
@@ -332,7 +332,7 @@ def test_client_process(fab_config, inqueue, outqueue, log_dir):
             print("\n\ncertbot.log\n" + "-"*80 + "\n")
             try:
                 grab_certbot_log(cxn)
-            except:
+            except:  # noqa: E722
                 print("log fail\n")
                 traceback.print_exc(file=sys.stdout)
                 pass

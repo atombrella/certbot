@@ -1466,7 +1466,7 @@ class MainTest(test_util.ConfigTestCase):
                                         print("Returned", ret)
                                         raise AssertionError(ret)
                                     assert not error_expected, "renewal should have errored"
-                                except: # pylint: disable=bare-except
+                                except: # noqa: E722
                                     if not error_expected:
                                         raise AssertionError(
                                             "Unexpected renewal error:\n" +
@@ -1483,7 +1483,7 @@ class MainTest(test_util.ConfigTestCase):
                     mock_client.obtain_certificate.assert_called_once_with([mock.ANY], None)
             else:
                 assert mock_client.obtain_certificate.call_count == 0
-        except:
+        except:  # noqa: E722
             self._dump_log()
             raise
         finally:

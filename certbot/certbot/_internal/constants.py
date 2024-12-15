@@ -16,7 +16,7 @@ SETUPTOOLS_PLUGINS_ENTRY_POINT = "certbot.plugins"
 OLD_SETUPTOOLS_PLUGINS_ENTRY_POINT = "letsencrypt.plugins"
 """Plugins Setuptools entry point before rename."""
 
-CLI_DEFAULTS: Dict[str, Any] = dict(  # pylint: disable=use-dict-literal
+CLI_DEFAULTS: Dict[str, Any] = dict(  # noqa: C408
     config_files=[
         os.path.join(misc.get_default_folder('config'), 'cli.ini'),
         # https://freedesktop.org/wiki/Software/xdg-user-dirs/
@@ -126,8 +126,8 @@ CLI_DEFAULTS: Dict[str, Any] = dict(  # pylint: disable=use-dict-literal
     dns_rfc2136=False,
     dns_route53=False,
     dns_sakuracloud=False
-
 )
+
 STAGING_URI = "https://acme-staging-v02.api.letsencrypt.org/directory"
 
 V1_URI = "https://acme-v01.api.letsencrypt.org/directory"

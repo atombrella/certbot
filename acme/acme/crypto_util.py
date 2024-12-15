@@ -161,7 +161,7 @@ class SSLSocket:  # pylint: disable=too-few-public-methods
                 raise OSError(error)
 
             return ssl_sock, addr
-        except:
+        except:  # noqa: E722
             # If we encounter any error, close the new socket before reraising
             # the exception.
             sock.close()

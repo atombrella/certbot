@@ -26,7 +26,6 @@ class SSLSocketAndProbeSNITest(unittest.TestCase):
     def setUp(self):
         self.cert = test_util.load_comparable_cert('rsa2048_cert.pem')
         key = test_util.load_pyopenssl_private_key('rsa2048_key.pem')
-        # pylint: disable=protected-access
         certs = {b'foo': (key, self.cert.wrapped)}
 
         from acme.crypto_util import SSLSocket
@@ -82,8 +81,7 @@ class SSLSocketTest(unittest.TestCase):
     def test_ssl_socket_invalid_arguments(self):
         from acme.crypto_util import SSLSocket
         with pytest.raises(ValueError):
-            _ = SSLSocket(None, {'sni': ('key', 'cert')},
-                    cert_selection=lambda _: None)
+            _ = SSLSocket(None, {'sni': ('key', 'cert')}, cert_selection=lambda _: None)
         with pytest.raises(ValueError):
             _ = SSLSocket(None)
 

@@ -310,7 +310,7 @@ class TempUmaskTests(test_util.TempDirTestCase):
             with filesystem.temp_umask(0o0077):
                 assert self._check_umask() == 0o0077
                 raise Exception()
-        except:
+        except:  # noqa: E722
             assert self._check_umask() == 0o0022
 
 
@@ -473,7 +473,7 @@ class CheckPermissionsTest(test_util.TempDirTestCase):
     def test_check_owner_linux(self):
         assert filesystem.check_owner(self.probe_path) is True
 
-        import os as std_os  # pylint: disable=os-module-forbidden
+        import os as std_os  # noqa: TID901
 
         # See related inline comment in certbot.compat.filesystem.check_owner method
         # that explains why MyPy/PyLint check disable is needed here.
@@ -565,7 +565,7 @@ class RealpathTest(test_util.TempDirTestCase):
         os.symlink(link2_path, link3_path)
         os.symlink(link3_path, link1_path)
 
-        with pytest.raises(RuntimeError, match='link1 is a loop!') as error:
+        with pytest.raises(RuntimeError, match='link1 is a loop!') as _:
             filesystem.realpath(link1_path)
 
 
@@ -642,6 +642,7 @@ class ReadlinkTest(unittest.TestCase):
         mock_readlink.return_value = "\\\\?\\C:\\long" + 1000 * "\\path"
         with pytest.raises(ValueError):
             filesystem.readlink("dummy")
+
 
 @contextlib.contextmanager
 def _fix_windows_runtime():

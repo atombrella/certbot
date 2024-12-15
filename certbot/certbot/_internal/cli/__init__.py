@@ -1,9 +1,7 @@
 """Certbot command line argument & config processing."""
 # pylint: disable=too-many-lines
 import argparse
-import logging
 import logging.handlers
-import sys
 from typing import Any
 from typing import List
 from typing import Optional
@@ -34,7 +32,6 @@ from certbot._internal.cli.cli_utils import CustomHelpFormatter
 from certbot._internal.cli.cli_utils import flag_default
 from certbot._internal.cli.cli_utils import HelpfulArgumentGroup
 from certbot._internal.cli.cli_utils import nonnegative_int
-from certbot._internal.cli.cli_utils import parse_preferred_challenges
 from certbot._internal.cli.cli_utils import read_file
 from certbot._internal.cli.cli_utils import set_test_server_options
 from certbot._internal.cli.group_adder import _add_all_groups
@@ -45,7 +42,6 @@ from certbot._internal.cli.subparsers import _create_subparsers
 from certbot._internal.cli.verb_help import VERB_HELP
 from certbot._internal.cli.verb_help import VERB_HELP_MAP
 from certbot._internal.plugins import disco as plugins_disco
-import certbot._internal.plugins.selection as plugin_selection
 from certbot.plugins import enhancements
 
 logger = logging.getLogger(__name__)

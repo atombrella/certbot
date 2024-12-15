@@ -42,7 +42,7 @@ if not std_os.environ.get("CERTBOT_DOCS") == "1":
 
 # Import our internal path module, then allow certbot.compat.os.path
 # to behave as a module (similarly to os.path).
-from certbot.compat import _path as path  # type: ignore  # pylint: disable=wrong-import-position
+from certbot.compat import _path as path  # type: ignore  # # noqa: E402
 std_sys.modules[__name__ + '.path'] = path
 
 # Clean all remaining importables that are not from the core os module.

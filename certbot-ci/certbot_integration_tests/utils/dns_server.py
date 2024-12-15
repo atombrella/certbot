@@ -59,7 +59,7 @@ class DNSServer:
         try:
             self._configure_bind()
             self._start_bind()
-        except:
+        except:  # noqa: E722
             self.stop()
             raise
 
@@ -69,7 +69,7 @@ class DNSServer:
             try:
                 self.process.terminate()
                 self.process.wait(constants.MAX_SUBPROCESS_WAIT)
-            except BaseException as e:  # pylint: disable=broad-except
+            except BaseException as e:  # noqa: E722
                 print("BIND9 did not stop cleanly: {}".format(e), file=sys.stderr)
 
         shutil.rmtree(self.bind_root, ignore_errors=True)
@@ -114,7 +114,7 @@ class DNSServer:
 
         try:
             self._wait_until_ready()
-        except:
+        except:  # noqa: E722
             # The container might be running even if we think it isn't
             self.stop()
             raise
@@ -145,7 +145,7 @@ class DNSServer:
                     return
                 # If we got a response but it wasn't the one we wanted, wait a little
                 time.sleep(1)
-            except:  # pylint: disable=bare-except
+            except:  # noqa: E722
                 # If there was a network error, wait a little
                 time.sleep(1)
             finally:

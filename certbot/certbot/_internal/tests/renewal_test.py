@@ -172,7 +172,7 @@ class RenewalTest(test_util.ConfigTestCase):
 
         from certbot._internal import renewal
         lineage_config = copy.deepcopy(self.config)
-        renewal_candidate = renewal.reconstitute(lineage_config, rc_path)
+        _ = renewal.reconstitute(lineage_config, rc_path)
         # This means that manual_public_ip_logging_ok was not modified in the config based on its
         # value in the renewal conf file
         assert isinstance(lineage_config.manual_public_ip_logging_ok, mock.MagicMock)
@@ -285,7 +285,7 @@ class DescribeResultsTest(unittest.TestCase):
         _renew_describe_results(*args, **kwargs)
 
     def _assert_success_output(self, lines):
-        self.mock_notify.assert_has_calls([mock.call(l) for l in lines])
+        self.mock_notify.assert_has_calls([mock.call(line) for line in lines])
 
     def test_no_renewal_attempts(self):
         self._call(mock.MagicMock(dry_run=True), [], [], [], [])

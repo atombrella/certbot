@@ -239,7 +239,7 @@ def _release_locks() -> None:
     for dir_lock in _LOCKS.values():
         try:
             dir_lock.release()
-        except:  # pylint: disable=bare-except
+        except:  # noqa: E722
             msg = 'Exception occurred releasing lock: {0!r}'.format(dir_lock)
             logger.debug(msg, exc_info=True)
     _LOCKS.clear()
@@ -642,11 +642,11 @@ def enforce_domain_sanity(domain: Union[str, bytes]) -> str:
     if len(domain) > 255:
         raise errors.ConfigurationError("{0} it is too long.".format(msg))
     labels = domain.split('.')
-    for l in labels:
-        if not l:
+    for label in labels:
+        if not label:
             raise errors.ConfigurationError("{0} it contains an empty label.".format(msg))
-        if len(l) > 63:
-            raise errors.ConfigurationError("{0} label {1} is too long.".format(msg, l))
+        if len(label) > 63:
+            raise errors.ConfigurationError("{0} label {1} is too long.".format(msg, label))
 
     return domain
 

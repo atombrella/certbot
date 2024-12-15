@@ -1,7 +1,6 @@
 """Tests for acme.jose shim."""
 import importlib
 import sys
-import unittest
 
 import pytest
 
@@ -21,16 +20,18 @@ def _test_it(submodule, attribute):
 
     # We use the imports below with eval, but pylint doesn't
     # understand that.
-    import josepy  # pylint: disable=unused-import
+    import josepy  # noqa: F401
 
-    import acme  # pylint: disable=unused-import
+    import acme  # noqa: F401
     acme_jose_mod = eval(acme_jose_path)  # pylint: disable=eval-used
     josepy_mod = eval(josepy_path)  # pylint: disable=eval-used
     assert acme_jose_mod is josepy_mod
     assert getattr(acme_jose_mod, attribute) is getattr(josepy_mod, attribute)
 
+
 def test_top_level():
     _test_it('', 'RS512')
+
 
 def test_submodules():
     # This test ensures that the modules in josepy that were

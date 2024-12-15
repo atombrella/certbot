@@ -413,8 +413,12 @@ class ClientTest(ClientTestCommon):
         self.client.auth_handler.handle_authorizations.return_value = authzr
 
         identifier = messages.Identifier(typ=messages.IDENTIFIER_FQDN, value='example.com')
-        subproblem = messages.Error.with_code('caa', detail='bar', title='title', identifier=identifier)
-        error_with_subproblems = messages.Error.with_code('malformed', detail='foo', title='title', subproblems=[subproblem])
+        subproblem = messages.Error.with_code(
+            'caa', detail='bar', title='title', identifier=identifier
+        )
+        error_with_subproblems = messages.Error.with_code(
+            'malformed', detail='foo', title='title', subproblems=[subproblem]
+        )
         self.client.acme.finalize_order.side_effect = [error_with_subproblems, mock.DEFAULT]
 
         self.config.allow_subset_of_names = True
@@ -430,8 +434,10 @@ class ClientTest(ClientTestCommon):
         successful_domains = [d for d in self.eg_domains if d != 'example.com']
         assert mock_crypto_util.generate_key.call_count == 2
         mock_crypto_util.generate_csr.assert_has_calls([
-            mock.call(key, self.eg_domains, None, self.config.must_staple, self.config.strict_permissions),
-            mock.call(key, successful_domains, None, self.config.must_staple, self.config.strict_permissions)])
+            mock.call(key, self.eg_domains, None, self.config.must_staple,
+                      self.config.strict_permissions),
+            mock.call(key, successful_domains, None, self.config.must_staple,
+                      self.config.strict_permissions)])
         assert mock_crypto_util.cert_and_chain_from_fullchain.call_count == 1
 
     @mock.patch("certbot._internal.client.crypto_util")
@@ -450,9 +456,12 @@ class ClientTest(ClientTestCommon):
 
         identifier1 = messages.Identifier(typ=messages.IDENTIFIER_FQDN, value='example.com')
         identifier2 = messages.Identifier(typ=messages.IDENTIFIER_FQDN, value='www.example.com')
-        subproblem1 = messages.Error.with_code('caa', detail='bar', title='title', identifier=identifier1)
-        subproblem2 = messages.Error.with_code('caa', detail='bar', title='title', identifier=identifier2)
-        error_with_subproblems = messages.Error.with_code('malformed', detail='foo', title='title', subproblems=[subproblem1, subproblem2])
+        subproblem1 = messages.Error.with_code(
+            'caa', detail='bar', title='title', identifier=identifier1)
+        subproblem2 = messages.Error.with_code(
+            'caa', detail='bar', title='title', identifier=identifier2)
+        error_with_subproblems = messages.Error.with_code(
+            'malformed', detail='foo', title='title', subproblems=[subproblem1, subproblem2])
         self.client.acme.finalize_order.side_effect = error_with_subproblems
 
         self.config.allow_subset_of_names = True

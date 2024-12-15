@@ -349,7 +349,7 @@ class _DeprecationModule:
         delattr(self._module, attr)
 
     def __dir__(self) -> List[str]:  # pragma: no cover
-        return ['_module'] + dir(self._module)
+        return ['_module', *dir(self._module)]
 
 
 # Patching ourselves to warn about deprecation and planned removal of some elements in the module.
