@@ -955,7 +955,7 @@ class EnhanceConfigTest(ClientTestCommon):
     def _test_error(self, enhance_error=False, restart_error=False):
         self.config.redirect = True
         with mock.patch('certbot._internal.client.logger') as mock_logger, \
-             test_util.patch_display_util() as mock_gu:
+             test_util.patch_display_util() as _:
             with pytest.raises(errors.PluginError):
                 self._test_with_all_supported()
 

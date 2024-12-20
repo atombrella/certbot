@@ -362,7 +362,7 @@ def _pyopenssl_extract_san_list_raw(cert_or_req: Union[crypto.X509, crypto.X509R
     # not able to Parse IP Addresses in subjectAltName string.
 
     if isinstance(cert_or_req, crypto.X509):
-        # noqa: E501
+        # noqa
         text = crypto.dump_certificate(crypto.FILETYPE_TEXT, cert_or_req).decode('utf-8')
     else:
         text = crypto.dump_certificate_request(crypto.FILETYPE_TEXT, cert_or_req).decode('utf-8')

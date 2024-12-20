@@ -1,13 +1,7 @@
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["acme/acme","certbot*/certbot*"]
-
-[tool.coverage.report]
-exclude_also = [
-    "assert False",
-]
-show_missing = true
+source = ["acme/acme", "certbot*/certbot*"]
 
 [tool.ruff]
 select = [
@@ -20,8 +14,9 @@ select = [
     # pyupgrade
     # "UP",
     # Isort
-    "I",
+    # "I",
 ]
+# TID251 = tidy imports used for replacing the os-forbidden-import pylint custom rule
 extend-select = ["TID251"]
 line-length = 119
 

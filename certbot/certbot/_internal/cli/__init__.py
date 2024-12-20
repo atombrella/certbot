@@ -10,15 +10,15 @@ from typing import Type
 import certbot
 from certbot.configuration import NamespaceConfig
 from certbot._internal import constants
-from certbot._internal.cli.cli_constants import ARGPARSE_PARAMS_TO_REMOVE
+from certbot._internal.cli.cli_constants import ARGPARSE_PARAMS_TO_REMOVE  # noqa
 from certbot._internal.cli.cli_constants import cli_command
-from certbot._internal.cli.cli_constants import COMMAND_OVERVIEW
-from certbot._internal.cli.cli_constants import DEPRECATED_OPTIONS
-from certbot._internal.cli.cli_constants import EXIT_ACTIONS
-from certbot._internal.cli.cli_constants import HELP_AND_VERSION_USAGE
-from certbot._internal.cli.cli_constants import SHORT_USAGE
-from certbot._internal.cli.cli_constants import VAR_MODIFIERS
-from certbot._internal.cli.cli_constants import ZERO_ARG_ACTIONS
+from certbot._internal.cli.cli_constants import COMMAND_OVERVIEW  # noqa
+from certbot._internal.cli.cli_constants import DEPRECATED_OPTIONS  # noqa
+from certbot._internal.cli.cli_constants import EXIT_ACTIONS  # noqa
+from certbot._internal.cli.cli_constants import HELP_AND_VERSION_USAGE  # noqa
+from certbot._internal.cli.cli_constants import SHORT_USAGE  # noqa
+from certbot._internal.cli.cli_constants import VAR_MODIFIERS  # noqa
+from certbot._internal.cli.cli_constants import ZERO_ARG_ACTIONS  # noqa
 from certbot._internal.cli.cli_utils import _DeployHookAction
 from certbot._internal.cli.cli_utils import _DomainsAction
 from certbot._internal.cli.cli_utils import _EncodeReasonAction
