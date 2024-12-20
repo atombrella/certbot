@@ -9,11 +9,6 @@ exclude_also = [
 ]
 show_missing = true
 
-# [lint.flake8-tidy-imports.banned-api]
-# banned-modules =
-#   mock = "Use unittest.mock."
-#   os = "Use certbot.compat.os instead"
-
 [tool.ruff]
 select = [
     # pycodestyle
@@ -24,10 +19,24 @@ select = [
     "W",
     # pyupgrade
     # "UP",
-    # Tidy Imports
-    "TID",
+    # Isort
+    "I",
 ]
+extend-select = ["TID251"]
 line-length = 119
-exclude = ["tools", "letstest", "linter_plugin.py", "certbot/docs/conf.py"]
+
+exclude = ["tools", "letstest", "certbot/docs/conf.py"]
 # Remove if/when we move setup.py python-requires metadata to pyproject.toml
 target-version = "py39"
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"os".msg = "Forbidden use of os module, certbot.compat.os must be used instead"
+
+[tool.ruff.lint.per-file-ignores]
+"acme/acme/*" = ["TID251"]
+"certbot-ci/*" = ["TID251"]
+"certbot-compatibility-test/*" = ["TID251"]
+"modification-check.py" = ["TID251"]
+"setup.py" = ["TID251"]
+"*/_internal/tests/*" = ["TID251"]
+"*/docs/conf.py" = ["TID251"]

@@ -20,13 +20,13 @@ isort:skip_file
 # First round of wrapping: we import statically all public attributes exposed by the os module
 # This allows in particular to have pylint, mypy, IDEs be aware that most of os members are
 # available in certbot.compat.os.
-from os import *  # noqa: F403, TID901
+from os import *  # noqa: F403, TID251
 
 # Second round of wrapping: we import dynamically all attributes from the os module that have not
 # yet been imported by the first round (static import). This covers in particular the case of
 # specific python 3.x versions where not all public attributes are in the special __all__ of os,
 # and so not in `from os import *`.
-import os as std_os  # noqa: F402
+import os as std_os  # noqa: F402, TID251
 import sys as std_sys
 
 ourselves = std_sys.modules[__name__]

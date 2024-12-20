@@ -1,7 +1,7 @@
 """Compat module to handle files security on Windows and Linux"""
 from contextlib import contextmanager
 import errno
-import os  # pylint: disable=os-module-forbidden
+import os  # noqa: TID251
 import stat
 from typing import Any
 from typing import Dict

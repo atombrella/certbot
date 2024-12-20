@@ -342,7 +342,7 @@ class WindowsMkdirTests(test_util.TempDirTestCase):
 
     def test_makedirs_switch_os_mkdir(self):
         path = os.path.join(self.tempdir, 'dir')
-        import os as std_os  # pylint: disable=os-module-forbidden
+        import os as std_os  # noqa: TID251
         original_mkdir = std_os.mkdir
 
         filesystem.makedirs(path)
@@ -473,7 +473,7 @@ class CheckPermissionsTest(test_util.TempDirTestCase):
     def test_check_owner_linux(self):
         assert filesystem.check_owner(self.probe_path) is True
 
-        import os as std_os  # noqa: TID901
+        import os as std_os  # noqa: TID251
 
         # See related inline comment in certbot.compat.filesystem.check_owner method
         # that explains why MyPy/PyLint check disable is needed here.

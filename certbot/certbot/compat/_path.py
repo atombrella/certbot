@@ -12,11 +12,11 @@ isort:skip_file
 # First round of wrapping: we import statically all public attributes exposed by the os.path
 # module. This allows in particular to have pylint, mypy, IDEs be aware that most of os.path
 # members are available in certbot.compat.path.
-from os.path import *  # pylint: disable=wildcard-import,unused-wildcard-import,os-module-forbidden
+from os.path import *  # noqa
 
 # Second round of wrapping: we import dynamically all attributes from the os.path module that have
 # not yet been imported by the first round (static star import).
-import os.path as std_os_path  # pylint: disable=os-module-forbidden
+import os.path as std_os_path  # noqa: TID251
 import sys as std_sys
 
 ourselves = std_sys.modules[__name__]
